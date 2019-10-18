@@ -17,7 +17,7 @@ public class GirlFragment extends BasePagerFragment {
     @Override
     public SimpleRecAdapter getAdapter() {
         if (adapter == null) {
-            adapter = new GirlAdapter(context);
+            adapter = new GirlAdapter(getContext());
             adapter.setRecItemClick(new RecyclerItemCallback<GankResults.Item, GirlAdapter.ViewHolder>() {
                 @Override
                 public void onItemClick(int position, GankResults.Item model, int tag, GirlAdapter.ViewHolder holder) {
@@ -30,7 +30,7 @@ public class GirlFragment extends BasePagerFragment {
 
     @Override
     public void setLayoutManager(XRecyclerView recyclerView) {
-        recyclerView.gridLayoutManager(context, 2);
+        recyclerView.gridLayoutManager(getContext(), 2);
     }
 
     @Override

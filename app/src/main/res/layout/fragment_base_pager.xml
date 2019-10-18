@@ -6,4 +6,7 @@
     android:layout_height="match_parent"
     app:recyclerBackgroundColor="#f5f5f5"
     app:recyclerScrollbarNone="true"
-    app:recyclerScrollbarStyle="outsideOverlay" />
+    app:recyclerScrollbarStyle="outsideOverlay"
+    app:x_emptyLayoutId="@layout/view_empty"
+    app:x_errorLayoutId="@layout/view_error"
+    app:x_loadingLayoutId="@layout/view_loading"/>

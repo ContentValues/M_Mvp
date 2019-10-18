@@ -46,6 +46,8 @@ dependencies {
     api rootProject.ext.dependencies["rxlifecycle-android"]
     api rootProject.ext.dependencies["rxlifecycle-components"]
     api rootProject.ext.dependencies["rxpermissions"]
+
+    api 'com.squareup.okhttp3:logging-interceptor:3.10.0'
 }
 
 //tasks.withType(JavaCompile) {

@@ -1,7 +1,6 @@
 package cn.love.demo.ui;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
@@ -14,9 +13,9 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import butterknife.BindView;
+import cn.love.base.BaseActivity;
 import cn.love.demo.R;
 import cn.love.demo.kit.AppKit;
-import cn.love.mvp.XActivity;
 import cn.love.router.Router;
 import cn.love.widget.XStateController;
 
@@ -24,7 +23,7 @@ import cn.love.widget.XStateController;
  * Created by wanglei on 2016/12/31.
  */
 
-public class WebActivity extends XActivity {
+public class WebActivity extends BaseActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -41,9 +40,8 @@ public class WebActivity extends XActivity {
     public static final String PARAM_URL = "url";
     public static final String PARAM_DESC = "desc";
 
-
     @Override
-    public void initData(Bundle savedInstanceState) {
+    public void initView() {
         url = getIntent().getStringExtra(PARAM_URL);
         desc = getIntent().getStringExtra(PARAM_DESC);
 
@@ -55,7 +53,7 @@ public class WebActivity extends XActivity {
     }
 
     private void initContentLayout() {
-        contentLayout.loadingView(View.inflate(context, R.layout.view_loading, null));
+        contentLayout.loadingView(View.inflate(this, R.layout.view_loading, null));
     }
 
     private void initRefreshLayout() {
@@ -178,18 +176,20 @@ public class WebActivity extends XActivity {
                 .launch();
     }
 
-    @Override
-    public int getOptionsMenuId() {
-        return R.menu.menu_web;
-    }
+//    @Override
+//    public int getOptionsMenuId() {
+//        return R.menu.menu_web;
+//    }
 
     @Override
     public int getLayoutId() {
         return R.layout.activity_web;
     }
 
-    @Override
-    public Object newP() {
-        return null;
-    }
+
+
+//    @Override
+//    public Object newP() {
+//        return null;
+//    }
 }

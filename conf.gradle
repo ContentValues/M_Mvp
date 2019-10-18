@@ -10,7 +10,7 @@ ext {
 
             VSupportSdk      : '27.1.1',
             VRetrofitSdk     : "2.2.0",
-            VOkhttp          : "3.4.2",
+            VOkhttp          : "3.6.0",
             VRxlifecycle     : "2.0.1"
     ]
     dependencies = [

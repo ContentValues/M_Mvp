@@ -3,6 +3,7 @@ package cn.love.demo;
 import android.app.Application;
 import android.content.Context;
 
+import cn.love.GlobalAppComponent;
 import cn.love.net.NetError;
 import cn.love.net.NetProvider;
 import cn.love.net.RequestHandler;
@@ -71,6 +72,8 @@ public class App extends Application {
                 return false;
             }
         });
+
+        GlobalAppComponent.init(this);
     }
 
     public static Context getContext() {

@@ -17,14 +17,14 @@ public class GanhuoFragment extends BasePagerFragment {
     @Override
     public SimpleRecAdapter getAdapter() {
         if (adapter == null) {
-            adapter = new GanhuoAdapter(context);
+            adapter = new GanhuoAdapter(getContext());
             adapter.setRecItemClick(new RecyclerItemCallback<GankResults.Item, GanhuoAdapter.ViewHolder>() {
                 @Override
                 public void onItemClick(int position, GankResults.Item model, int tag, GanhuoAdapter.ViewHolder holder) {
                     super.onItemClick(position, model, tag, holder);
                     switch (tag) {
                         case GanhuoAdapter.TAG_VIEW:
-                            WebActivity.launch(context, model.getUrl(), model.getDesc());
+                            WebActivity.launch(getActivity(), model.getUrl(), model.getDesc());
                             break;
                     }
                 }
@@ -35,7 +35,7 @@ public class GanhuoFragment extends BasePagerFragment {
 
     @Override
     public void setLayoutManager(XRecyclerView recyclerView) {
-        recyclerView.verticalLayoutManager(context);
+        recyclerView.verticalLayoutManager(getContext());
     }
 
     @Override

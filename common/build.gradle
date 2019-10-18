@@ -1,0 +1,84 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+
+    }
+    buildTypes {
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+//    androidTestImplementation("com.android.support.test.espresso:espresso-core:$rootProject.espressoVersion", {
+//        exclude group: 'com.android.support', module: 'support-annotations'
+//    })
+//    api "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    api rootProject.ext.dependencies["appcompat-v7"]
+
+
+//    testImplementation "junit:junit:$rootProject.junitVersion"
+
+
+    //retrofit
+//    api "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+//    api "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+//    api "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
+    api rootProject.ext.dependencies["retrofit"]
+    api rootProject.ext.dependencies["retrofit-converter-gson"]
+    api rootProject.ext.dependencies["retrofit-adapter-rxjava"]
+
+//    api "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
+    api rootProject.ext.dependencies["okhttp3"]
+
+
+//    api "com.google.code.gson:gson:$rootProject.gsonVersion"
+    api rootProject.ext.dependencies["gson"]
+
+
+    //rxJava
+//    api "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
+//    api "io.reactivex.rxjava2:rxjava:$rootProject.rxjavaVersion"
+    api rootProject.ext.dependencies["rxandroid"]
+    api rootProject.ext.dependencies["rxjava"]
+
+    //dagger
+//    api "com.google.dagger:dagger:$rootProject.daggerVersion"
+//    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
+
+    //ButterKnife
+//    api "com.jakewharton:butterknife:$rootProject.butterKnifeVersion"
+    api rootProject.ext.dependencies["butterknife"]
+
+
+    //design
+//    api "com.android.support:design:$rootProject.supportLibraryVersion"
+    api rootProject.ext.dependencies["design"]
+
+    //leak
+//    debugApi 'com.squareup.leakcanary:leakcanary-android:1.5'
+//    releaseApi 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+//    testImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    //fresco
+    api "com.facebook.fresco:fresco:1.2.0"
+    // RunTimePermissionRequest
+    api "pub.devrel:easypermissions:0.3.1"
+
+    // 支持 GIF 动图，需要添加
+    api "com.facebook.fresco:animated-gif:1.2.0"
+
+    // router
+//    api "com.alibaba:arouter-api:$rootProject.arouterVersion"
+//     annotationProcessor "com.alibaba:arouter-compiler:$rootProject.arouterCompilerVersion"
+
+}

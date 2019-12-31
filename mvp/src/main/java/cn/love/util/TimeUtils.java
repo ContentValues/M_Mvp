@@ -2,7 +2,6 @@ package cn.love.util;
 
 import android.support.annotation.NonNull;
 
-import com.blankj.utilcode.constant.TimeConstants;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -11,6 +10,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+
+import cn.love.constant.TimeConstants;
 
 /**
  * <pre>

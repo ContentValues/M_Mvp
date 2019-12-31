@@ -56,22 +56,6 @@ public class Kits {
             return packageInfo.versionCode;
         }
 
-        /**
-         * 获取当前版本
-         *
-         * @param context
-         * @return
-         */
-        public static String getVersionName(Context context) {
-            PackageManager pManager = context.getPackageManager();
-            PackageInfo packageInfo = null;
-            try {
-                packageInfo = pManager.getPackageInfo(context.getPackageName(), 0);
-            } catch (PackageManager.NameNotFoundException e) {
-                e.printStackTrace();
-            }
-            return packageInfo.versionName;
-        }
 
         /**
          * 安装App

@@ -145,6 +145,13 @@ public class DiskCache implements ICache {
         return Codec.MD5.getMessageDigest(key.getBytes());
     }
 
+    /**
+     * 当SD卡存在或者SD卡不可被移除的时候，就调用getExternalCacheDir()方法来获取缓存路径，否则就调用getCacheDir()方法来获取缓存路径。前者获取到的就是 
+     * /sdcard/Android/data/<application package>/cache 这个路径，而后者获取到的是 /data/data/<application package>/cache 这个路径。
+     * @param context
+     * @param dirName
+     * @return
+     */
     private static File getDiskCacheDir(Context context, String dirName) {
         String cachePath;
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())

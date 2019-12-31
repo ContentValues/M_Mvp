@@ -7,8 +7,10 @@ package com.example.abshttp;
 public class Log {
 
     public static void d(String e, String msg) {
-
         System.out.println(e + ":   " + msg);
+    }
 
+    public static void e(String e, String msg) {
+        System.out.println(e + ":   " + msg);
     }
 }

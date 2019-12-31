@@ -45,11 +45,11 @@ public class BaseDataManager  {
         return mDataManager.getSPMapData();
     }
 
-    protected Disposable changeIOToMainThread(Observable<ResponseBody> observable , DisposableObserver<ResponseBody> consumer ){
-        return observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(consumer);
-    }
+//    protected Disposable changeIOToMainThread(Observable<ResponseBody> observable , DisposableObserver<ResponseBody> consumer ){
+//        return observable.subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeWith(consumer);
+//    }
 
     protected  <S> S getService(Class<S> serviceClass){
         return mDataManager.getService(serviceClass);

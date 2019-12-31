@@ -32,8 +32,8 @@ public class XApi {
     private Map<String, Retrofit> retrofitMap = new HashMap<>();
     private Map<String, OkHttpClient> clientMap = new HashMap<>();
 
-    public static final long connectTimeoutMills = 10 * 1000l;
-    public static final long readTimeoutMills = 10 * 1000l;
+    public static final long connectTimeoutMills = 3 * 1000l;
+    public static final long readTimeoutMills = 3 * 1000l;
 
     private static XApi instance;
 

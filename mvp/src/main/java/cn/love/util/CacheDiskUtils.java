@@ -11,7 +11,6 @@ import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.blankj.utilcode.constant.CacheConstants;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -36,6 +35,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
+
+import cn.love.constant.CacheConstants;
 
 /**
  * <pre>

@@ -366,6 +366,7 @@ public class JDAdapter extends XRecAdapter<HomeIndex.ItemInfoListBean, RecyclerV
                     @Override
                     public void onTick(long millisUntilFinished) {
                         Log.d(TAG, "onTick() " + millisUntilFinished);
+
                         long temp = millisUntilFinished / 1000;
                         long hours = temp / 3600;
                         long minutes = (temp - (3600 * hours)) / 60;
@@ -384,7 +385,9 @@ public class JDAdapter extends XRecAdapter<HomeIndex.ItemInfoListBean, RecyclerV
                     }
                 };
                 downTimerSparseArray.put(this.hashCode(), timer);
-                timer.start();
+
+                //todo 影响性能暂时关闭了
+//                timer.start();
             }
         }
     }
@@ -518,6 +521,7 @@ public class JDAdapter extends XRecAdapter<HomeIndex.ItemInfoListBean, RecyclerV
     public void cancelAllTimers() {
         for (int i = 0; i < downTimerSparseArray.size(); i++) {
             CountDownTimer cdt = downTimerSparseArray.valueAt(i);
+            Log.d(TAG, "cancelAllTimers() " + cdt.hashCode());
             cdt.cancel();
         }
     }

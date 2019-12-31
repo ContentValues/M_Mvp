@@ -1,5 +1,7 @@
 package com.example.abshttp.simple5;
 
+import android.support.v7.app.AlertDialog;
+
 import com.example.abshttp.ConstantValue;
 
 
@@ -7,7 +9,7 @@ import com.example.abshttp.ConstantValue;
  * Author：created by SugarT
  * Time：2019/11/27 17
  */
-public class T_Simple4 {
+public class T_Simple5 {
 
 
     public static void main(String args[]) {
@@ -15,16 +17,11 @@ public class T_Simple4 {
     }
 
     public static void getString() {
-//        Map<String, Object> params = new HashMap<>();
-//        // 特定参数
-//        params.put("iid", 6152551759L);
-//        params.put("aid", 7);
 
-        HttpUtils.with()
-                .setUrl(ConstantValue.UrlConstant.HOME_DISCOVERY_URL)
-//                .setParams(params)
-                .setParams("iid", 6152551759L)
-                .setParams("aid", 7)
+        new HttpUtils.Builder()
+                .setUrl(ConstantValue.UrlConstant.XC_URL)
+                .create()
+                .httpRequest(new VolleyRequest())
                 .request(new HttpCallBack<String>() {
                     @Override
                     public void onSuccess(String result) {
@@ -36,7 +33,5 @@ public class T_Simple4 {
 
                     }
                 });
-
-
     }
 }

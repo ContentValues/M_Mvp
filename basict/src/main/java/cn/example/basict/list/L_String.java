@@ -5,4 +5,9 @@ package cn.example.basict.list;
  * Time：2019/11/20 17
  */
 public class L_String {
+
+    public static void main(String args[]) {
+
+
+    }
 }

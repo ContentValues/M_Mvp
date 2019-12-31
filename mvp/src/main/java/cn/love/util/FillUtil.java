@@ -1,4 +1,4 @@
-package cn.love.utlis;
+package cn.love.util;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;

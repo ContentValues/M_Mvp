@@ -17,11 +17,17 @@ public abstract class BaseFragment extends LifecycleFragment {
      */
     protected DataManager mDataManager;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mDataManager = GlobalAppComponent.getAppComponent().getDataManager();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       View v = LayoutInflater.from(getContext()).inflate(getLayoutId(), container, false);
+        View v = LayoutInflater.from(getContext()).inflate(getLayoutId(), container, false);
         KnifeKit.bind(this, v);
         return v;
     }
@@ -31,8 +37,6 @@ public abstract class BaseFragment extends LifecycleFragment {
         super.onViewCreated(view, savedInstanceState);
         initView(view);
         initData();
-
-        mDataManager = GlobalAppComponent.getAppComponent().getDataManager();
     }
 
     public abstract int getLayoutId();

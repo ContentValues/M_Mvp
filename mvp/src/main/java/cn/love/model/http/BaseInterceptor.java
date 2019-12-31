@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.Set;
 
 import cn.love.XDroidConf;
-import cn.love.utlis.NetworkUtil;
+import cn.love.util.NetworkUtils;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -47,7 +47,7 @@ public class BaseInterceptor<T> implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-        if (!NetworkUtil.isNetworkAvailable(context)) {
+        if (!NetworkUtils.isAvailable()) {
             throw new NoNetWorkException();
         }
         Request request = chain.request();

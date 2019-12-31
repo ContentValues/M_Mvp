@@ -1,67 +1,81 @@
 package com.example.abshttp.simple4;
 
-import com.example.abshttp.Log;
-import com.example.abshttp.Utils;
-import com.example.abshttp.simple3.HttpCallBack;
-import com.google.gson.Gson;
-
-import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
  * Author：created by SugarT
  * Time：2019/11/27 17
+ *
+ * 链式写法
+ *
+ * 单一职责原则:就一个类而言，应该仅有一个引起它变化的原因。简单来说，一个类中应该是一组相关性很高的函数、数据的封装
+ *
+ *
  */
 public class HttpUtils {
 
+   private OKhttpRequest oKhttpRequest;
+    private String url;
+    private Map<String, Object> params;
+    private final int TYPE_POST = 0x0011;
+    private final int TYPE_GET  = 0x0022;
+    private int mType = TYPE_GET;
+    private boolean cache = false;
 
-    public static <T> void get(String url, Map<String, Object> params, final HttpCallBack<T> callback) {
-        Log.e("Post请求路径：", "开始网络请求");
-        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
-        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient mOkHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(httpLoggingInterceptor).build();
 
-        // 公共参数
-        params.put("app_name", "joke_essay");
-        params.put("version_name", "5.7.0");
-        params.put("ac", "wifi");
-        params.put("device_id", "30036118478");
-        params.put("device_brand", "Xiaomi");
-        params.put("update_version_code", "5701");
-        params.put("manifest_version_code", "570");
-        params.put("longitude", "113.000366");
-        params.put("latitude", "28.171377");
-        params.put("device_platform", "android");
 
-        final String jointUrl = Utils.jointParams(url, params);  //打印
-        Log.e("Post请求路径：", jointUrl);
-
-        Request.Builder requestBuilder = new Request.Builder().url(jointUrl);
-        //可以省略，默认是GET请求
-        Request request = requestBuilder.build();
-
-        mOkHttpClient.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                callback.onFail(e);
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                final String resultJson = response.body().string();
-                Gson gson = new Gson();
-                T objResult = (T) gson.fromJson(resultJson,Utils.analysisClazzInfo(callback));
-                callback.onSuccess(objResult);
-            }
-        });
+    public static HttpUtils with(){
+        return new HttpUtils();
     }
 
+    private HttpUtils(){
+         //todo 依赖倒置原则 高层模块不依赖低层模块的细节
+        /**
+         *  HttpUtils相当于高层 OKhttpRequest相当于低层细节 所以可以抽离出去
+         */
+        oKhttpRequest = new OKhttpRequest();
+        params = new HashMap<>();
+    }
+
+    public HttpUtils setUrl(String url) {
+        this.url = url;
+        return this;
+    }
+
+
+    public HttpUtils setmType(int mType) {
+        this.mType = mType;
+        return this;
+    }
+
+    public HttpUtils setParams(Map<String, Object> params) {
+        this.params = params;
+        return this;
+    }
+
+    public HttpUtils setParams(String name,Object value){
+        params.put(name,value);
+        return this;
+    }
+
+    public HttpUtils setCache(boolean cache) {
+        this.cache = cache;
+        return this;
+    }
+
+    public <T> void request(HttpCallBack<T> callBack){
+        //执行方法
+         oKhttpRequest.get(url,params,cache,callBack);
+    }
+
+
+     /*public  <T> void get(Context context, String url, Map<String, Object> params, final HttpCallBack<T> callback, final boolean cache) {
+        mHttpRequest.get(context,url,params,callback,cache);
+    }
+    // 10几个参数以上
+    public  <T> void get(Context context, String url, Map<String, Object> params,
+                         final HttpCallBack<T> callback, final boolean cache,final boolean cookie,int recount) {
+        mHttpRequest.get(context,url,params,callback,cache);
+    }*/
 }

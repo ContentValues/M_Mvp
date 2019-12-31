@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
-import com.blankj.utilcode.constant.CacheConstants;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -13,6 +12,8 @@ import org.json.JSONObject;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+
+import cn.love.constant.CacheConstants;
 
 /**
  * <pre>

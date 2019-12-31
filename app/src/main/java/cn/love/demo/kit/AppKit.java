@@ -5,6 +5,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -18,6 +19,16 @@ import okio.Buffer;
  */
 
 public class AppKit {
+
+
+    public  void log(String text) {
+
+        Log.d("AppKit",text);
+
+//        Toast.makeText(context, "复制成功", Toast.LENGTH_SHORT).show();
+    }
+
+
 
     public static void copyToClipBoard(Context context, String text) {
         ClipboardManager cm = (ClipboardManager) context.getSystemService(

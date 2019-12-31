@@ -1,4 +1,4 @@
-package cn.love.demo.ui;
+package cn.love.demo.ui.mainfragment;
 
 import cn.love.base.SimpleRecAdapter;
 import cn.love.demo.adapter.GirlAdapter;

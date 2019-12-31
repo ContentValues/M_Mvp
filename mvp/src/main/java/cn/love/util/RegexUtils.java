@@ -2,13 +2,14 @@ package cn.love.util;
 
 import android.support.v4.util.SimpleArrayMap;
 
-import com.blankj.utilcode.constant.RegexConstants;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import cn.love.constant.RegexConstants;
 
 /**
  * <pre>

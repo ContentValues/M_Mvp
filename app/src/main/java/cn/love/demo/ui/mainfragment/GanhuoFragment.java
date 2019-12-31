@@ -1,8 +1,9 @@
-package cn.love.demo.ui;
+package cn.love.demo.ui.mainfragment;
 
 import cn.love.base.SimpleRecAdapter;
-import cn.love.demo.adapter.HomeAdapter;
+import cn.love.demo.adapter.GanhuoAdapter;
 import cn.love.demo.model.GankResults;
+import cn.love.demo.ui.WebActivity;
 import cn.love.widget.xrecyclerview.RecyclerItemCallback;
 import cn.love.widget.xrecyclerview.XRecyclerView;
 
@@ -10,20 +11,20 @@ import cn.love.widget.xrecyclerview.XRecyclerView;
  * Created by wanglei on 2016/12/31.
  */
 
-public class HomeFragment extends BasePagerFragment {
+public class GanhuoFragment extends BasePagerFragment {
 
-    HomeAdapter adapter;
+    GanhuoAdapter adapter;
 
     @Override
     public SimpleRecAdapter getAdapter() {
         if (adapter == null) {
-            adapter = new HomeAdapter(getContext());
-            adapter.setRecItemClick(new RecyclerItemCallback<GankResults.Item, HomeAdapter.ViewHolder>() {
+            adapter = new GanhuoAdapter(getContext());
+            adapter.setRecItemClick(new RecyclerItemCallback<GankResults.Item, GanhuoAdapter.ViewHolder>() {
                 @Override
-                public void onItemClick(int position, GankResults.Item model, int tag, HomeAdapter.ViewHolder holder) {
+                public void onItemClick(int position, GankResults.Item model, int tag, GanhuoAdapter.ViewHolder holder) {
                     super.onItemClick(position, model, tag, holder);
                     switch (tag) {
-                        case HomeAdapter.TAG_VIEW:
+                        case GanhuoAdapter.TAG_VIEW:
                             WebActivity.launch(getActivity(), model.getUrl(), model.getDesc());
                             break;
                     }
@@ -40,10 +41,10 @@ public class HomeFragment extends BasePagerFragment {
 
     @Override
     public String getType() {
-        return "all";
+        return "Android";
     }
 
-    public static HomeFragment newInstance() {
-        return new HomeFragment();
+    public static GanhuoFragment newInstance() {
+        return new GanhuoFragment();
     }
 }

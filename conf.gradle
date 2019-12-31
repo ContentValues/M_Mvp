@@ -30,7 +30,8 @@ ext {
             "avi-loading"                : "com.wang.avi:library:1.0.2",
             "rxbus"                      : "com.blankj:rxbus:1.2",
 
-            "gson"                       : "com.google.code.gson:gson:2.6.2",
+            "gson"                       : "com.google.code.gson:gson:2.8.6",
+            "fastjson"                   : "com.alibaba:fastjson:1.1.68.android",
             "rxandroid"                  : "io.reactivex.rxjava2:rxandroid:2.0.1",
             "rxjava"                     : "io.reactivex.rxjava2:rxjava:2.0.1",
             "retrofit"                   : "com.squareup.retrofit2:retrofit:${android["VRetrofitSdk"]}",

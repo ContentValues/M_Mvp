@@ -15,8 +15,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.WindowManager;
 
-import com.blankj.utilcode.constant.PermissionConstants;
-import com.blankj.utilcode.util.PermissionUtils.OnRationaleListener.ShouldRequest;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +23,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.blankj.utilcode.constant.PermissionConstants.Permission;
+import cn.love.constant.PermissionConstants;
+
 
 /**
  * <pre>
@@ -180,7 +179,7 @@ public final class PermissionUtils {
      * @param permissions The permissions.
      * @return the single {@link PermissionUtils} instance
      */
-    public static PermissionUtils permission(@Permission final String... permissions) {
+    public static PermissionUtils permission(@PermissionConstants.Permission final String... permissions) {
         return new PermissionUtils(permissions);
     }
 

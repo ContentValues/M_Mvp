@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -16,6 +17,20 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    greendao {
+        schemaVersion 1//数据库版本号
+//        daoPackage 'com.xiaoyehai.landsurvey.greendao'//设置DaoMaster、DaoSession、Dao包名
+//        targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录
+        //targetGenDirTest：设置生成单元测试目录
+        //generateTests：设置自动生成单元测试用例
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs' //this way we can find the .aar file in libs folder
+        }
+    }
 }
 
 
@@ -23,5 +38,10 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     annotationProcessor rootProject.ext.dependencies["butterknife-apt"]
     implementation rootProject.ext.dependencies["avi-loading"]
-    api project(":mvp")
+    implementation project(":mvp")
+    implementation project(":abshttp")
+    implementation 'org.greenrobot:greendao:3.2.2' // 添加库
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
+
+//    implementation 'com.facebook.stetho:stetho:1.5.0'已经废弃使用不了啦
 }

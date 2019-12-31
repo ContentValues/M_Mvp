@@ -3,13 +3,11 @@ package cn.love.demo;
 import com.google.gson.Gson;
 
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
 
+import cn.love.demo.model.GankResults;
 import cn.love.model.BaseDataManager;
 import cn.love.model.DataManager;
-import cn.love.model.http.BaseApiService;
-import cn.love.utlis.FillUtil;
+import cn.love.util.FillUtil;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -28,7 +26,7 @@ public class MainDataManager extends BaseDataManager {
         super(mDataManager);
     }
 
-    public static MainDataManager getInstance(DataManager dataManager){
+    public static MainDataManager getInstance(DataManager dataManager) {
         return new MainDataManager(dataManager);
     }
 
@@ -38,18 +36,49 @@ public class MainDataManager extends BaseDataManager {
      */
     public Disposable login(DisposableObserver<ResponseBody> consumer, String mobile, String verifyCode) {
 
-        return changeIOToMainThread(getService(MainApiService.class).login(mobile,verifyCode), consumer);
+        Observable<ResponseBody> observable = getService(MainApiService.class).login(mobile, verifyCode);
+
+        return observable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(consumer);
+//        return changeIOToMainThread(getService(MainApiService.class).login(mobile,verifyCode), consumer);
     }
 
-    public Disposable getMainData(int start , int count , DisposableObserver<ResponseBody> consumer){
-        Map<String,Object> map = new HashMap<>(2);
-        map.put("start",start);
-        map.put("count",count);
-        return changeIOToMainThread(getService(BaseApiService.class).executeGet("http://www.baidu.com",map),consumer);
 
+//    public Disposable getMainData(int start, int count, DisposableObserver<ResponseBody> consumer) {
+//        Map<String, Object> map = new HashMap<>(2);
+//        map.put("start", start);
+//        map.put("count", count);
+//
+//        Observable<ResponseBody> observable = getService(BaseApiService.class).executeGet("http://www.baidu.com", map);
+//
+//        return observable
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeWith(consumer);
+//    }
+
+
+    /**
+     * 获取主页数据
+     *
+     * @param type     请求类型
+     * @param pageSize 一页最大的数据
+     * @param pageNum  当前是第几页
+     * @param consumer
+     * @return
+     */
+    public Observable getMainData(String type, int pageSize, int pageNum
+            , DisposableObserver<ResponseBody> consumer) {
+        Observable<GankResults> observable = getService(MainApiService.class).getGankData(type, pageSize, pageNum);
+        return observable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public<S> Disposable getData(DisposableObserver<S> consumer , final Class<S> clazz , final String fillName) {
+
+    public <S> Disposable getData(DisposableObserver<S> consumer, final Class<S> clazz, final String fillName) {
 
         return Observable.create(new ObservableOnSubscribe<S>() {
             @Override

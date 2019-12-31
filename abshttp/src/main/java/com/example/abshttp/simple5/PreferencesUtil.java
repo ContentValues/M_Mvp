@@ -29,6 +29,7 @@ public class PreferencesUtil {
                 if (preferencesUtil == null) {
                     // 使用双重同步锁
                     preferencesUtil = new PreferencesUtil();
+
                 }
             }
         }
@@ -47,7 +48,6 @@ public class PreferencesUtil {
      * 所以这里使用context.getApplicationContext()
      */
     private PreferencesUtil() {
-
     }
 
     /**

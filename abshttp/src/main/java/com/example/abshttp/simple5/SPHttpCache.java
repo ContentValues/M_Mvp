@@ -7,11 +7,12 @@ package com.example.abshttp.simple5;
 public class SPHttpCache {
 
     public  void saveCache(String url, String resultJson) {
-        PreferencesUtil.getInstance().saveParam(url, resultJson);
+//        PreferencesUtil.getInstance().saveParam(url, resultJson);
     }
 
     public  String getCache(String url) {
-        return (String) PreferencesUtil.getInstance().getObject(url);
+//        return (String) PreferencesUtil.getInstance().getObject(url);
+        return "";
     }
 
 }

@@ -2,12 +2,16 @@ package com.example.abshttp.simple3;
 
 import com.example.abshttp.Log;
 import com.example.abshttp.Utils;
+import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.util.Map;
 
+import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
@@ -16,7 +20,8 @@ import okhttp3.logging.HttpLoggingInterceptor;
  */
 public class HttpUtils {
 
-    public static void get(String url,Map<String, Object> params,Callback callback){
+
+    public static <T> void get(String url, Map<String, Object> params, final HttpCallBack<T> callback) {
         Log.e("Post请求路径：", "开始网络请求");
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -42,7 +47,20 @@ public class HttpUtils {
         //可以省略，默认是GET请求
         Request request = requestBuilder.build();
 
-        mOkHttpClient.newCall(request).enqueue(callback);
+        mOkHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                callback.onFail(e);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                final String resultJson = response.body().string();
+                Gson gson = new Gson();
+                T objResult = (T) gson.fromJson(resultJson,Utils.analysisClazzInfo(callback));
+                callback.onSuccess(objResult);
+            }
+        });
     }
 
 }

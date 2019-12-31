@@ -2,8 +2,12 @@ package cn.love.demo;
 
 import android.app.Application;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+
 
 import cn.love.GlobalAppComponent;
+import cn.love.demo.dao.DaoMaster;
+import cn.love.demo.dao.DaoSession;
 import cn.love.net.NetError;
 import cn.love.net.NetProvider;
 import cn.love.net.RequestHandler;
@@ -20,10 +24,17 @@ public class App extends Application {
 
     private static Context context;
 
+    public static final String DB_NAME = "app.db";
+
+    private static DaoSession mDaoSession;
+
     @Override
     public void onCreate() {
         super.onCreate();
         context = this;
+
+        initGreenDao();
+//        Stetho.initializeWithDefaults(this);
 
         XApi.registerProvider(new NetProvider() {
 
@@ -78,5 +89,19 @@ public class App extends Application {
 
     public static Context getContext() {
         return context;
+    }
+
+
+
+
+    private void initGreenDao() {
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, DB_NAME);
+        SQLiteDatabase db = helper.getWritableDatabase();
+        DaoMaster daoMaster = new DaoMaster(db);
+        mDaoSession = daoMaster.newSession();
+    }
+
+    public static DaoSession getmDaoSession() {
+        return mDaoSession;
     }
 }

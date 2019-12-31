@@ -1,14 +1,8 @@
-package com.example.abshttp.simeple2;
+package com.example.abshttp.simple2;
 
-import com.example.abshttp.ConstantValue;
 import com.example.abshttp.Log;
 import com.example.abshttp.Utils;
-
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
-
-import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -19,6 +13,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
  * Time：2019/11/27 17
  */
 public class HttpUtils {
+
 
     public static void get(String url,Map<String, Object> params,Callback callback){
         Log.e("Post请求路径：", "开始网络请求");
@@ -48,5 +43,6 @@ public class HttpUtils {
 
         mOkHttpClient.newCall(request).enqueue(callback);
     }
+
 
 }

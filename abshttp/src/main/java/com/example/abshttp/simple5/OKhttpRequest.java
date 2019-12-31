@@ -20,22 +20,22 @@ import okhttp3.logging.HttpLoggingInterceptor;
  * Author：created by SugarT
  * Time：2019/11/27 17
  */
-public class OKhttpRequest {
-
+public class OKhttpRequest implements IHttpRequest{
 
     private final SPHttpCache spHttpCache;
+    private final OkHttpClient mOkHttpClient;
 
     public OKhttpRequest(){
         spHttpCache = new SPHttpCache();
-    }
-
-
-    public  <T> void get(String url, Map<String, Object> params, final boolean cache, final HttpCallBack<T> callback) {
-        Log.e("Gost请求路径：", "开始网络请求");
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient mOkHttpClient = new OkHttpClient.Builder()
+        mOkHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(httpLoggingInterceptor).build();
+    }
+
+    @Override
+    public  <T> void get(String url, Map<String, Object> params, final boolean cache, final HttpCallBack<T> callback) {
+        Log.e("Gost请求路径：", "开始网络请求");
 
         // 公共参数
         params.put("app_name", "joke_essay");
@@ -92,6 +92,7 @@ public class OKhttpRequest {
     }
 
 
+    @Override
     public  <T> void post(String url, Map<String, Object> params, final boolean cache, final HttpCallBack<T> callback) {
         Log.e("Post请求路径：", "开始网络请求");
     }

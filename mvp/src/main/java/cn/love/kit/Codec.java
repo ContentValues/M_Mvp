@@ -537,4 +537,22 @@ public class Codec {
             return type;
         }
     }
+
+
+
+    public void testMD5() {
+    }
+
+
+
+
+    public void testBase64() {
+        String str = "待加密的内容222";
+        byte[] encodeStr = BASE64.encode(str.getBytes());
+        System.out.println("加密后的内容:");
+        System.out.println(new String(encodeStr));
+        byte[] decodeStr = BASE64.decode(encodeStr);
+        System.out.println("解密后的内容:");
+        System.out.println(new String(decodeStr));
+    }
 }

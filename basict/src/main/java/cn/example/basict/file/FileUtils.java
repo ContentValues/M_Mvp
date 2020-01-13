@@ -1,6 +1,5 @@
 package cn.example.basict.file;
 
-import android.text.TextUtils;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -9,7 +8,6 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import cn.love.utlis.DateUtil;
 
 /**
  * Author：created by SugarT
@@ -77,7 +75,7 @@ public class FileUtils {
      */
     public static synchronized String getCurrentDate() {
         Date currentDate = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", DateUtil.LOCALE);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return format.format(currentDate);
     }
 }

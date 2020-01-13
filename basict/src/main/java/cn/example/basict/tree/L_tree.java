@@ -2,8 +2,10 @@ package cn.example.basict.tree;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -34,20 +36,20 @@ public class L_tree {
 
         BinaryTree binaryTree = new BinaryTree();
 
-//        binaryTree.insert(10);
-//        binaryTree.insert(8);
-//        binaryTree.insert(15);
-//        binaryTree.insert(4);
-//        binaryTree.insert(9);
-//        binaryTree.insert(11);
-//        binaryTree.insert(20);
+        binaryTree.insert(10);
+        binaryTree.insert(8);
+        binaryTree.insert(15);
+        binaryTree.insert(4);
+        binaryTree.insert(9);
+        binaryTree.insert(11);
+        binaryTree.insert(20);
+//
+//        binaryTree.insert(5);
+//        binaryTree.insert(2);
+//        binaryTree.insert(13);
 
-        binaryTree.insert(5);
-        binaryTree.insert(2);
-        binaryTree.insert(13);
 
-
-        System.out.println("二叉树的最大深度: " + binaryTree.getMaxHeight(binaryTree.root));
+//        System.out.println("二叉树的最大深度: " + binaryTree.getMaxHeight(binaryTree.root));
 //
 //        binaryTree.insert(4);
 //        binaryTree.insert(2);
@@ -72,8 +74,10 @@ public class L_tree {
         System.out.println(binaryTree.help(binaryTree.root));
 
 
-        System.out.println("--------------------累加--------------------");
-        binaryTree.preOrder(binaryTree.convertBST(binaryTree.root));
+//
+//
+//        System.out.println("--------------------累加--------------------");
+//        binaryTree.preOrder(binaryTree.convertBST(binaryTree.root));
 
 //        flatten(binaryTree.root);
 
@@ -110,7 +114,6 @@ public class L_tree {
 //        binaryTree.afterOrder(binaryTree.root);
 
 
-
 //        flatten22(treeNode1);
 
 
@@ -130,39 +133,66 @@ public class L_tree {
 //            System.out.println(header.val);
 //            header = header.right;
 //        }
+
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+    int minValue = -1;
+
+    public int minDiffInBST(TreeNode root) {
+
+        if(root != null){
+            minDiffInBST(root.left);
+            if(root.val>minValue){
+                minValue = root.val;
+            }
+            minDiffInBST(root.right);
+        }
+     return  minValue;
+    }
 
     private static TreeNode prev = null;
 
     /**
      * 给定一个二叉树，原地将它展开为链表。
-     *
+     * <p>
      * 例如，给定二叉树
-     *
-     *     1
-     *    / \
-     *   2   5
-     *  / \   \
+     * <p>
+     * 1
+     * / \
+     * 2   5
+     * / \   \
      * 3   4   6
      * 将其展开为：
-     *
+     * <p>
      * 1
-     *  \
-     *   2
-     *    \
-     *     3
-     *      \
-     *       4
-     *        \
-     *         5
-     *          \
-     *           6
+     * \
+     * 2
+     * \
+     * 3
+     * \
+     * 4
+     * \
+     * 5
+     * \
+     * 6
+     *
      * @param root
      */
     public static void flatten22(TreeNode root) {
 
-        if(root == null){
+        if (root == null) {
             return;
         }
 
@@ -182,15 +212,57 @@ public class L_tree {
 //        prev = root;
     }
 
-    static LinkedList<TreeNode> beforeList = new LinkedList<>();
+    /**
+     * 给定一个二叉树，返回其节点值自底向上的层次遍历。 （即按从叶子节点所在层到根节点所在的层，逐层从左向右遍历）
+     * <p>
+     * 例如：
+     * 给定二叉树 [3,9,20,null,null,15,7],
+     * <p>
+     * 3
+     * / \
+     * 9  20
+     * /  \
+     * 15   7
+     * 返回其自底向上的层次遍历为：
+     * <p>
+     * [
+     * [15,7],
+     * [9,20],
+     * [3]
+     * ]
+     *
+     * @param root
+     * @return
+     */
+    public static List<List<Integer>> levelOrderBottom(TreeNode root) {
 
-    public static void flatten(TreeNode root) {
-        if(root == null){
-            return;
+        List<List<Integer>> modules = new ArrayList<>();
+
+        if (root == null) {
+            return new ArrayList<>();
         }
-        beforeList.add(root);
-        flatten(root.left);
-        flatten(root.right);
+
+        LinkedList<TreeNode> queen = new LinkedList<>();
+        queen.offer(root);
+        while (!queen.isEmpty()) {
+            List<Integer> datas = new ArrayList<>();
+            int count = queen.size();
+            while (count > 0) {
+                TreeNode data = queen.poll();
+                datas.add(data.val);
+                if (data.left != null) {
+                    queen.offer(data.left);
+                }
+                if (data.right != null) {
+                    queen.offer(data.right);
+                }
+                --count;
+            }
+
+            modules.add(0,datas);
+//            modules.add(datas);
+        }
+        return modules;
     }
 
 
@@ -219,7 +291,6 @@ public class L_tree {
     public static List<List<Integer>> levelOrder(TreeNode root) {
 
         List<List<Integer>> res = new LinkedList<>();
-
         LinkedList<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
         while (!queue.isEmpty()) {
@@ -228,7 +299,7 @@ public class L_tree {
             while (count > 0) {
                 TreeNode node = queue.poll();
                 list.add(node.val);
-                System.out.println(node.val);
+//                System.out.println(node.val);
                 if (node.left != null) {
                     queue.offer(node.left);
                 }
@@ -457,8 +528,8 @@ public class L_tree {
             if (current == null) {
                 return;
             }
-            afterOrder(current.left);
             afterOrder(current.right);
+            afterOrder(current.left);
             System.out.println(current.val);
         }
 
@@ -481,29 +552,34 @@ public class L_tree {
 
         /**
          * 求二叉数右子树的深度
+         *
          * @param root
          * @return
          */
-        public int help(TreeNode root){
-            if(root == null){
-                return  0 ;
+        public int help(TreeNode root) {
+            if (root == null) {
+                return 0;
             }
-            return help(root.right)+1;
+            return help(root.right) + 1;
         }
 
 
         /**
          * 累加树
+         *
          * @param root
          * @return
          */
         int add = 0;
+
         public TreeNode convertBST(TreeNode root) {
-            if(root == null){
+
+
+            if (root == null) {
                 return root;
             }
             convertBST(root.right);
-            root.val+= add;
+            root.val += add;
             add = root.val;
             convertBST(root.left);
             return root;

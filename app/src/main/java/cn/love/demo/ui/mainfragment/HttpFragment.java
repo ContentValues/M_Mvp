@@ -5,8 +5,6 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.example.abshttp.Log;
-
-
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
